@@ -1,33 +1,30 @@
 import FadeIn from '../common/FadeIn'
+import { useNotion } from '../../hooks/useNotion'
 
-const SERVICES = [
-  {
-    icon: '🏠',
-    title: '방문요양 서비스',
-    desc: '일상생활 지원, 신체활동 보조, 정서 지원 등 어르신의 가정에서 전문 요양보호사가 1:1 맞춤 돌봄을 제공합니다.',
-    tags: ['신체활동 지원', '가사 지원', '정서 지원'],
-  },
-  {
-    icon: '🛁',
-    title: '방문목욕 서비스',
-    desc: '목욕 차량을 이용한 전문 방문목욕 서비스로 거동이 불편한 어르신의 위생관리를 도와드립니다.',
-    tags: ['차량 목욕', '가정 내 목욕', '위생 관리'],
-  },
-  {
-    icon: '🧠',
-    title: '인지활동 프로그램',
-    desc: '치매 예방 및 인지기능 향상을 위한 체계적인 프로그램을 운영합니다.',
-    tags: ['치매 예방', '인지 훈련', '사회 활동'],
-  },
-  {
-    icon: '💊',
-    title: '건강관리 지원',
-    desc: '투약 관리, 병원 동행, 건강 상태 체크 등 어르신의 건강한 일상을 지원합니다.',
-    tags: ['투약 관리', '병원 동행', '건강 체크'],
-  },
+const FALLBACK_SERVICES = [
+  { icon: '🏠', title: '방문요양 서비스', desc: '일상생활 지원, 신체활동 보조, 정서 지원 등 어르신의 가정에서 전문 요양보호사가 1:1 맞춤 돌봄을 제공합니다.', tags: ['신체활동 지원', '가사 지원', '정서 지원'] },
+  { icon: '🛁', title: '방문목욕 서비스', desc: '목욕 차량을 이용한 전문 방문목욕 서비스로 거동이 불편한 어르신의 위생관리를 도와드립니다.', tags: ['차량 목욕', '가정 내 목욕', '위생 관리'] },
+  { icon: '🧠', title: '인지활동 프로그램', desc: '치매 예방 및 인지기능 향상을 위한 체계적인 프로그램을 운영합니다.', tags: ['치매 예방', '인지 훈련', '사회 활동'] },
+  { icon: '💊', title: '건강관리 지원', desc: '투약 관리, 병원 동행, 건강 상태 체크 등 어르신의 건강한 일상을 지원합니다.', tags: ['투약 관리', '병원 동행', '건강 체크'] },
 ]
 
+const ICON_MAP = { '방문요양': '🏠', '방문목욕': '🛁', '인지활동': '🧠', '건강관리': '💊' }
+
 export default function ServiceSection() {
+  const { data } = useNotion('service')
+
+  let services = FALLBACK_SERVICES
+  if (data && data.length > 0) {
+    services = data
+      .sort((a, b) => (a['순서'] || 0) - (b['순서'] || 0))
+      .map(item => ({
+        icon: ICON_MAP[item['태그']?.[0]] || '🏠',
+        title: item['이름'] || '',
+        desc: item['설명'] || '',
+        tags: item['태그'] || [],
+      }))
+  }
+
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="mx-auto max-w-6xl px-5">
@@ -44,7 +41,7 @@ export default function ServiceSection() {
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {SERVICES.map((service, i) => (
+          {services.map((service, i) => (
             <FadeIn key={service.title} delay={i * 0.1}>
               <div className="group p-7 lg:p-8 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 h-full">
                 <span className="text-3xl">{service.icon}</span>
@@ -52,10 +49,7 @@ export default function ServiceSection() {
                 <p className="mt-3 text-sm text-gray-500 leading-relaxed">{service.desc}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-mint-pale text-deep-green text-xs font-medium rounded-lg"
-                    >
+                    <span key={tag} className="px-3 py-1 bg-mint-pale text-deep-green text-xs font-medium rounded-lg">
                       {tag}
                     </span>
                   ))}

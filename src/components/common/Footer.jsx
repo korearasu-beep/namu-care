@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useSiteSettings } from '../../contexts/SiteSettingsContext'
 
 const SERVICE_LINKS = [
   { to: '/', label: '서비스 안내' },
@@ -8,12 +9,17 @@ const SERVICE_LINKS = [
 ]
 
 export default function Footer() {
+  const { settings } = useSiteSettings()
+  const phone = settings['전화번호'] || '041-555-9991'
+  const email = settings['이메일'] || 'namuhelp25@naver.com'
+  const address = settings['주소'] || '충청남도 천안시 서북구 불당25로 174, 1021호'
+  const hours = settings['운영시간'] || '평일·주말 포함 07:00~21:00'
+  const tagline = settings['태그라인'] || '어르신과 보호자 모두 만족하는 편안한 도움 서비스를 제공하겠습니다.'
+
   return (
     <footer className="bg-[#1A2B23] text-gray-300">
       <div className="mx-auto max-w-6xl px-5 py-14 lg:py-16">
-        {/* 3컬럼 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
-          {/* 로고 + 태그라인 */}
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
               <img
@@ -25,22 +31,16 @@ export default function Footer() {
               <span className="hidden text-white font-bold text-lg">나무재가 방문요양센터</span>
             </Link>
             <p className="text-sm leading-relaxed text-gray-400">
-              어르신과 보호자 모두 만족하는
-              <br />
-              편안한 도움 서비스를 제공하겠습니다.
+              {tagline}
             </p>
           </div>
 
-          {/* 서비스 링크 */}
           <div>
             <h3 className="text-white text-sm font-semibold mb-4 tracking-wide">서비스</h3>
             <ul className="flex flex-col gap-2.5">
               {SERVICE_LINKS.map((link) => (
                 <li key={link.to}>
-                  <Link
-                    to={link.to}
-                    className="text-sm text-gray-400 hover:text-mint transition-colors"
-                  >
+                  <Link to={link.to} className="text-sm text-gray-400 hover:text-mint transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -48,29 +48,24 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* 연락처 */}
           <div>
             <h3 className="text-white text-sm font-semibold mb-4 tracking-wide">연락처</h3>
             <ul className="flex flex-col gap-2.5 text-sm text-gray-400">
               <li className="flex items-start gap-2">
                 <PhoneIcon />
-                <a href="tel:041-555-9991" className="hover:text-mint transition-colors">
-                  041-555-9991
-                </a>
+                <a href={`tel:${phone}`} className="hover:text-mint transition-colors">{phone}</a>
               </li>
               <li className="flex items-start gap-2">
                 <MailIcon />
-                <a href="mailto:namuhelp25@naver.com" className="hover:text-mint transition-colors">
-                  namuhelp25@naver.com
-                </a>
+                <a href={`mailto:${email}`} className="hover:text-mint transition-colors">{email}</a>
               </li>
               <li className="flex items-start gap-2">
                 <MapIcon />
-                <span>충청남도 천안시 서북구 불당25로 174, 1021호</span>
+                <span>{address}</span>
               </li>
               <li className="flex items-start gap-2">
                 <ClockIcon />
-                <span>평일·주말 포함 07:00~21:00</span>
+                <span>{hours}</span>
               </li>
             </ul>
           </div>

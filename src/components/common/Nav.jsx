@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useSiteSettings } from '../../contexts/SiteSettingsContext'
 
 const NAV_LINKS = [
   { to: '/', label: '서비스 안내' },
@@ -12,6 +13,8 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const location = useLocation()
+  const { settings } = useSiteSettings()
+  const phone = settings['전화번호'] || '041-555-9991'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -75,7 +78,7 @@ export default function Nav() {
               )
             })}
             <a
-              href="tel:041-555-9991"
+              href={`tel:${phone}`}
               className="ml-3 px-5 py-2.5 bg-deep-green text-white text-sm font-semibold rounded-xl hover:bg-deep-green/90 transition-colors"
             >
               무료 상담
@@ -142,10 +145,10 @@ export default function Nav() {
           })}
 
           <a
-            href="tel:041-555-9991"
+            href={`tel:${phone}`}
             className="mt-4 flex items-center justify-center py-3.5 bg-deep-green text-white text-[15px] font-semibold rounded-xl hover:bg-deep-green/90 transition-colors"
           >
-            무료 상담 041-555-9991
+            무료 상담 {phone}
           </a>
         </div>
       </aside>

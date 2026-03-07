@@ -1,6 +1,20 @@
 import FadeIn from '../common/FadeIn'
+import { useNotion } from '../../hooks/useNotion'
+import { useSiteSettings } from '../../contexts/SiteSettingsContext'
+
+const FALLBACK_GREETING = '안녕하세요, 나무재가방문요양센터 센터장입니다.\n\n어르신 한 분 한 분을 가족처럼 생각하며, 따뜻하고 전문적인 돌봄 서비스를 제공하기 위해 최선을 다하고 있습니다.\n\n나무처럼 든든하게, 어르신의 편안한 일상을 함께 만들어 가겠습니다.'
 
 export default function GreetingSection() {
+  const { data } = useNotion('about')
+  const { settings } = useSiteSettings()
+  const centerName = settings['센터명'] || '나무재가방문요양센터'
+
+  let greeting = FALLBACK_GREETING
+  if (data) {
+    const item = data.find(d => d['구분'] === 'greeting')
+    if (item?.['내용']) greeting = item['내용']
+  }
+
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="mx-auto max-w-6xl px-5">
@@ -10,7 +24,6 @@ export default function GreetingSection() {
         </FadeIn>
 
         <div className="mt-12 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
-          {/* 사진 */}
           <FadeIn className="shrink-0">
             <div className="w-56 h-56 lg:w-64 lg:h-64 rounded-3xl overflow-hidden bg-mint-pale">
               <img
@@ -30,17 +43,12 @@ export default function GreetingSection() {
             </div>
           </FadeIn>
 
-          {/* 인사말 */}
           <FadeIn delay={0.15} className="flex-1">
-            <blockquote className="text-lg lg:text-xl text-gray-700 leading-relaxed">
-              "안녕하세요, 나무재가방문요양센터 센터장입니다.
-              <br /><br />
-              어르신 한 분 한 분을 가족처럼 생각하며, 따뜻하고 전문적인 돌봄 서비스를 제공하기 위해 최선을 다하고 있습니다.
-              <br /><br />
-              나무처럼 든든하게, 어르신의 편안한 일상을 함께 만들어 가겠습니다."
+            <blockquote className="text-lg lg:text-xl text-gray-700 leading-relaxed whitespace-pre-line">
+              "{greeting}"
             </blockquote>
             <div className="mt-6">
-              <p className="font-bold text-gray-900">나무재가방문요양센터</p>
+              <p className="font-bold text-gray-900">{centerName}</p>
               <p className="text-sm text-gray-400 mt-1">센터장 올림</p>
             </div>
           </FadeIn>

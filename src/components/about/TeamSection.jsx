@@ -1,48 +1,50 @@
 import FadeIn from '../common/FadeIn'
 
-const TEAM = [
-  { name: '센터장', role: '총괄 관리', img: '/images/team-1.jpg' },
-  { name: '사회복지사', role: '케어 플랜 수립', img: '/images/team-2.jpg' },
-  { name: '요양보호사팀', role: '방문요양 서비스', img: '/images/team-3.jpg' },
+const TEAM_STATS = [
+  { num: '전원', label: '요양보호사 자격증 보유' },
+  { num: '정기', label: '전문 교육 및 역량 강화' },
+  { num: '맞춤', label: '어르신별 담당 배정' },
 ]
 
 export default function TeamSection() {
   return (
-    <section className="py-20 lg:py-28 bg-gray-50">
-      <div className="mx-auto max-w-6xl px-5">
+    <section className="py-24 px-6 bg-[#F2FBF6]">
+      <div className="mx-auto max-w-6xl">
         <FadeIn>
           <div className="text-center mb-14">
-            <span className="text-sm font-semibold text-mint tracking-wide">TEAM</span>
-            <h2 className="mt-3 text-3xl lg:text-4xl font-bold text-gray-900">함께하는 사람들</h2>
-            <p className="mt-4 text-gray-500">전문성과 따뜻한 마음을 겸비한 나무재가 팀입니다.</p>
+            <span className="inline-block text-[13px] font-bold text-deep-green tracking-[0.08em] uppercase mb-3">OUR TEAM</span>
+            <h2 className="text-[clamp(26px,4vw,36px)] font-extrabold text-gray-900 leading-[1.35]">
+              함께하는 <span className="text-deep-green">전문가들</span>
+            </h2>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {TEAM.map((member, i) => (
-            <FadeIn key={member.name} delay={i * 0.1}>
-              <div className="bg-white rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300">
-                <div className="aspect-[4/3] bg-mint-pale/50 relative">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.currentTarget.style.display = 'none' }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center text-deep-green/25">
-                    <svg className="w-14 h-14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="p-5 text-center">
-                  <h3 className="font-bold text-gray-900">{member.name}</h3>
-                  <p className="text-sm text-gray-400 mt-1">{member.role}</p>
-                </div>
+        {/* Team photo placeholder */}
+        <FadeIn delay={0.1}>
+          <div className="max-w-[800px] mx-auto rounded-3xl overflow-hidden bg-gradient-to-br from-mint-pale to-[#B8E8D0] aspect-[16/8] flex flex-col items-center justify-center gap-3 border border-gray-200 relative">
+            <img
+              src="/images/team.jpg"
+              alt="나무재가 전문 요양보호사 팀"
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={(e) => { e.currentTarget.style.display = 'none' }}
+            />
+            <div className="text-[56px]">👩‍⚕️👨‍⚕️👩‍⚕️👨‍⚕️👩‍⚕️</div>
+            <span className="text-[15px] text-deep-green font-semibold">나무재가 전문 요양보호사 팀</span>
+            <span className="text-xs text-gray-400">실제 팀 사진 또는 AI 생성 이미지 삽입 예정</span>
+          </div>
+        </FadeIn>
+
+        {/* Team stats */}
+        <FadeIn delay={0.2}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10 max-w-[800px] mx-auto">
+            {TEAM_STATS.map((s, i) => (
+              <div key={i} className="text-center p-7 bg-white rounded-2xl border border-[#F0F4F2]">
+                <div className="text-[22px] font-extrabold text-deep-green mb-1.5">{s.num}</div>
+                <div className="text-[13px] text-gray-500 font-medium">{s.label}</div>
               </div>
-            </FadeIn>
-          ))}
-        </div>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   )

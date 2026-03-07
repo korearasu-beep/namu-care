@@ -1,13 +1,16 @@
 import FadeIn from '../common/FadeIn'
 import { useNotion } from '../../hooks/useNotion'
-import { useSiteSettings } from '../../contexts/SiteSettingsContext'
 
-const FALLBACK_GREETING = '안녕하세요, 나무재가방문요양센터 센터장입니다.\n\n어르신 한 분 한 분을 가족처럼 생각하며, 따뜻하고 전문적인 돌봄 서비스를 제공하기 위해 최선을 다하고 있습니다.\n\n나무처럼 든든하게, 어르신의 편안한 일상을 함께 만들어 가겠습니다.'
+const FALLBACK_GREETING = `안녕하세요, 나무재가방문요양센터 센터장입니다.
+
+나무가 깊은 뿌리를 내려 흔들리지 않듯이, 저희 나무재가방문요양은 어르신 한 분 한 분의 삶에 깊이 뿌리내리는 돌봄을 실천하고자 합니다.
+
+어르신이 오랜 시간 살아온 익숙한 공간에서, 가족의 따뜻함을 느끼실 수 있는 서비스를 제공하는 것이 저희의 소명입니다. 전문 요양보호사 한 분 한 분이 정성과 책임감을 가지고 어르신을 모십니다.
+
+어르신과 보호자 모두 만족하는 편안한 도움 서비스, 나무재가방문요양이 함께하겠습니다.`
 
 export default function GreetingSection() {
   const { data } = useNotion('about')
-  const { settings } = useSiteSettings()
-  const centerName = settings['센터명'] || '나무재가방문요양센터'
 
   let greeting = FALLBACK_GREETING
   if (data) {
@@ -15,44 +18,49 @@ export default function GreetingSection() {
     if (item?.['내용']) greeting = item['내용']
   }
 
-  return (
-    <section className="py-20 lg:py-28 bg-white">
-      <div className="mx-auto max-w-6xl px-5">
-        <FadeIn>
-          <span className="text-sm font-semibold text-mint tracking-wide">GREETING</span>
-          <h2 className="mt-3 text-3xl lg:text-4xl font-bold text-gray-900">센터장 인사말</h2>
-        </FadeIn>
+  const paragraphs = greeting.split('\n\n').filter(Boolean)
 
-        <div className="mt-12 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
-          <FadeIn className="shrink-0">
-            <div className="w-56 h-56 lg:w-64 lg:h-64 rounded-3xl overflow-hidden bg-mint-pale">
+  return (
+    <section className="py-24 px-6 bg-white">
+      <div className="mx-auto max-w-[900px]">
+        <FadeIn>
+          <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-12 items-start">
+            {/* Director photo placeholder */}
+            <div className="rounded-3xl overflow-hidden bg-gradient-to-br from-mint-pale to-[#B8E8D0] aspect-[3/4] flex flex-col items-center justify-center gap-3 relative">
               <img
                 src="/images/director.jpg"
                 alt="센터장"
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
                 onError={(e) => { e.currentTarget.style.display = 'none' }}
               />
-              <div className="w-full h-full flex items-center justify-center text-deep-green/30">
-                <div className="text-center">
-                  <svg className="w-12 h-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                  </svg>
-                  <p className="text-xs font-medium">센터장 사진</p>
-                </div>
+              <div className="text-[64px] opacity-60">👩‍💼</div>
+              <span className="text-[13px] text-deep-green font-semibold opacity-70">센터장 사진</span>
+            </div>
+
+            {/* Greeting text */}
+            <div>
+              <div className="flex items-center gap-2.5 mb-6">
+                <div className="w-10 h-[3px] rounded-sm bg-gradient-to-r from-deep-green to-mint" />
+                <span className="text-[13px] font-bold text-deep-green tracking-[0.06em]">센터장 인사말</span>
+              </div>
+
+              <h2 className="text-[28px] font-extrabold text-gray-900 leading-[1.4] mb-6">
+                "어르신의 미소가<br />저희의 보람입니다"
+              </h2>
+
+              <div className="text-[15px] text-gray-500 leading-[1.9]">
+                {paragraphs.map((p, i) => (
+                  <p key={i} className={i < paragraphs.length - 1 ? 'mb-4' : ''}>{p}</p>
+                ))}
+              </div>
+
+              <div className="mt-8 p-5 rounded-2xl bg-mint-pale border-l-4 border-deep-green">
+                <p className="text-sm font-bold text-deep-green mb-0.5">나무재가방문요양센터 센터장</p>
+                <p className="text-[13px] text-gray-500">(센터장 성함을 입력해 주세요)</p>
               </div>
             </div>
-          </FadeIn>
-
-          <FadeIn delay={0.15} className="flex-1">
-            <blockquote className="text-lg lg:text-xl text-gray-700 leading-relaxed whitespace-pre-line">
-              "{greeting}"
-            </blockquote>
-            <div className="mt-6">
-              <p className="font-bold text-gray-900">{centerName}</p>
-              <p className="text-sm text-gray-400 mt-1">센터장 올림</p>
-            </div>
-          </FadeIn>
-        </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   )

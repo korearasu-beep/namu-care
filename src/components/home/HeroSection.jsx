@@ -1,125 +1,136 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import FadeIn from '../common/FadeIn'
-import { useNotion } from '../../hooks/useNotion'
 import { useSiteSettings } from '../../contexts/SiteSettingsContext'
 
-const FALLBACK_HERO = {
-  title: '어르신의 일상에\n따뜻한 돌봄을 더합니다',
-  desc: '전문 요양보호사가 가정을 방문하여 어르신께 맞춤형 케어 서비스를 제공합니다.',
-  badge: '충남 천안 방문요양 전문',
-}
-const FALLBACK_STATS = [
-  { num: '500+', label: '누적 이용자' },
-  { num: '10년+', label: '돌봄 경험' },
-  { num: '98%', label: '만족도' },
-]
-
-function formatStat(value, label) {
-  if (label.includes('만족도')) return `${value}%`
-  if (label.includes('경험')) return `${value}년+`
-  return `${value}+`
-}
-
 export default function HeroSection() {
-  const { data } = useNotion('main')
+  const [loaded, setLoaded] = useState(false)
   const { settings } = useSiteSettings()
   const phone = settings['전화번호'] || '041-555-9991'
 
-  let hero = FALLBACK_HERO
-  let stats = FALLBACK_STATS
-
-  if (data) {
-    const heroItems = data.filter(d => d['구분'] === 'hero').sort((a, b) => (a['순서'] || 0) - (b['순서'] || 0))
-    const statItems = data.filter(d => d['구분'] === 'stat').sort((a, b) => (a['순서'] || 0) - (b['순서'] || 0))
-
-    if (heroItems.length >= 2) {
-      hero = {
-        title: heroItems[0]['내용'] || FALLBACK_HERO.title,
-        desc: heroItems[1]['내용'] || FALLBACK_HERO.desc,
-        badge: FALLBACK_HERO.badge,
-      }
-    }
-    if (statItems.length > 0) {
-      stats = statItems.map(s => ({
-        num: formatStat(s['숫자값'], s['내용']),
-        label: s['내용'],
-      }))
-    }
-  }
-
-  const titleParts = hero.title.split('\n')
+  useEffect(() => { setTimeout(() => setLoaded(true), 100) }, [])
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-mint-pale via-white to-white">
-      <div className="mx-auto max-w-6xl px-5 py-20 lg:py-32 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-        <div className="flex-1 text-center lg:text-left">
-          <FadeIn>
-            <span className="inline-block px-4 py-1.5 bg-mint/20 text-deep-green text-sm font-medium rounded-full mb-6">
-              {hero.badge}
-            </span>
-            <h1 className="text-4xl lg:text-[52px] font-bold text-gray-900 leading-[1.2] tracking-tight">
-              {titleParts.map((part, i) => (
-                <span key={i}>
-                  {i === 0 ? part : <><br /><span className="text-deep-green">{part}</span></>}
-                </span>
-              ))}
-            </h1>
-            <p className="mt-6 text-lg text-gray-500 leading-relaxed max-w-md mx-auto lg:mx-0">
-              {hero.desc}
-            </p>
-          </FadeIn>
+    <section className="relative min-h-screen bg-gradient-to-br from-[#FAFDF8] via-mint-pale to-[#F2FBF6] flex items-center overflow-hidden pt-16">
+      {/* Background blurs */}
+      <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,_#B8E8D030,_transparent_70%)] blur-[40px]" />
+      <div className="absolute bottom-[5%] left-[-10%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,_#8FD5B720,_transparent_70%)] blur-[50px]" />
 
-          <FadeIn delay={0.15}>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-              <a
-                href={`tel:${phone}`}
-                className="px-7 py-4 bg-deep-green text-white font-semibold rounded-2xl hover:bg-deep-green/90 transition-all shadow-lg shadow-deep-green/20 text-center"
-              >
-                무료 상담 신청하기
-              </a>
-              <Link
-                to="/about"
-                className="px-7 py-4 bg-white text-deep-green font-semibold rounded-2xl border border-gray-200 hover:border-deep-green/30 hover:bg-mint-pale/50 transition-all text-center"
-              >
-                센터 알아보기
-              </Link>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <div className="mt-12 flex gap-8 justify-center lg:justify-start">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center lg:text-left">
-                  <p className="text-2xl lg:text-3xl font-bold text-deep-green">{stat.num}</p>
-                  <p className="text-sm text-gray-400 mt-1">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
+      {/* Floating leaves */}
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute opacity-[0.12]"
+          style={{
+            top: `${15 + i * 18}%`,
+            right: `${5 + i * 12}%`,
+            transform: `rotate(${i * 45}deg)`,
+            animation: `float ${4 + i}s ease-in-out infinite alternate`,
+          }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75" stroke="#2D5A3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.3" />
+          </svg>
         </div>
+      ))}
 
-        <FadeIn delay={0.2} className="flex-1 w-full max-w-lg lg:max-w-none">
-          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-mint-light/50">
-            <img
-              src="/images/hero.jpg"
-              alt="방문요양 서비스"
-              className="w-full h-full object-cover"
-              onError={(e) => { e.currentTarget.style.display = 'none' }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center text-deep-green/40">
-              <div className="text-center">
-                <svg className="w-16 h-16 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.41a2.25 2.25 0 013.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                </svg>
-                <p className="text-sm font-medium">히어로 이미지</p>
-              </div>
-            </div>
+      <div className="mx-auto max-w-6xl px-6 py-16 pb-20 w-full relative z-[2]">
+        <div className="max-w-[640px]">
+          {/* Badge */}
+          <div
+            className="inline-flex items-center gap-2 bg-deep-green/[0.06] border border-deep-green/[0.12] rounded-full px-4 py-[7px] mb-7 transition-all duration-600"
+            style={{
+              opacity: loaded ? 1 : 0,
+              transform: loaded ? 'translateY(0)' : 'translateY(16px)',
+              transitionDelay: '0.2s',
+            }}
+          >
+            <div className="w-2 h-2 rounded-full bg-[#478A5F] shadow-[0_0_8px_#478A5F]" />
+            <span className="text-[13px] font-semibold text-deep-green">제주도 포함 전국 재가방문요양 전문기관</span>
           </div>
-        </FadeIn>
+
+          {/* Title */}
+          <h1
+            className="text-[clamp(32px,5vw,52px)] font-extrabold text-gray-900 leading-[1.3] tracking-tight mb-5 transition-all duration-700"
+            style={{
+              opacity: loaded ? 1 : 0,
+              transform: loaded ? 'translateY(0)' : 'translateY(24px)',
+              transitionDelay: '0.3s',
+            }}
+          >
+            익숙한 우리 집에서,<br />
+            <span className="text-deep-green">뿌리 깊은 돌봄</span>을<br />시작합니다
+          </h1>
+
+          {/* Description */}
+          <p
+            className="text-[clamp(16px,2vw,19px)] text-gray-500 leading-[1.7] mb-10 max-w-[480px] transition-all duration-700"
+            style={{
+              opacity: loaded ? 1 : 0,
+              transform: loaded ? 'translateY(0)' : 'translateY(24px)',
+              transitionDelay: '0.45s',
+            }}
+          >
+            어르신이 오래 살아온 집에서 편안하게 돌봄받으실 수 있도록,
+            전문 요양보호사가 직접 방문합니다.
+            <br /><strong className="text-gray-700">장기요양 등급 신청부터 서비스까지 한 번에.</strong>
+          </p>
+
+          {/* CTA Buttons */}
+          <div
+            className="flex flex-wrap gap-3.5 transition-all duration-700"
+            style={{
+              opacity: loaded ? 1 : 0,
+              transform: loaded ? 'translateY(0)' : 'translateY(24px)',
+              transitionDelay: '0.55s',
+            }}
+          >
+            <a
+              href={`tel:${phone}`}
+              className="inline-flex items-center gap-2 bg-deep-green text-white rounded-[14px] px-8 py-4 text-base font-bold shadow-[0_4px_24px_rgba(45,90,61,0.2)] hover:bg-deep-green/90 transition-colors"
+            >
+              무료 상담 신청하기
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </a>
+            <Link
+              to="/about"
+              className="bg-white text-deep-green border-[1.5px] border-gray-200 rounded-[14px] px-7 py-4 text-base font-semibold hover:border-deep-green hover:bg-mint-pale transition-all"
+            >
+              등급 신청 대행 안내
+            </Link>
+          </div>
+
+          {/* Credential badges */}
+          <div
+            className="flex flex-wrap gap-6 mt-12 transition-all duration-700"
+            style={{ opacity: loaded ? 1 : 0, transitionDelay: '0.7s' }}
+          >
+            {['장기요양기관 지정', '전문 요양보호사', '치매예방 특화'].map((t) => (
+              <div key={t} className="flex items-center gap-1.5">
+                <div className="w-[22px] h-[22px] rounded-full bg-deep-green/[0.07] flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10l4 4 6-8" stroke="#2D5A3D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </div>
+                <span className="text-sm text-gray-500 font-medium">{t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="absolute top-20 right-0 w-72 h-72 bg-mint/10 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-mint-pale/50 rounded-full blur-3xl -z-10" />
+      {/* Scroll indicator */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 transition-opacity duration-1000"
+        style={{ opacity: loaded ? 0.5 : 0, transitionDelay: '1.2s' }}
+      >
+        <span className="text-xs text-gray-400 tracking-[0.05em]">아래로 스크롤</span>
+        <div className="w-6 h-[38px] rounded-xl border-2 border-gray-400 relative">
+          <div className="w-1 h-2 rounded-sm bg-gray-400 absolute left-1/2 top-1.5 -translate-x-1/2 animate-[scrollPulse_2s_ease-in-out_infinite]" />
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes float { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-12px) rotate(5deg); } }
+        @keyframes scrollPulse { 0%,100% { opacity:1; top:6px; } 50% { opacity:0.3; top:16px; } }
+      `}</style>
     </section>
   )
 }

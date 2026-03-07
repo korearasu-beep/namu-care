@@ -1,12 +1,17 @@
 import FadeIn from '../common/FadeIn'
+import { useMainContent } from '../../contexts/MainContentContext'
 
-const TEAM_STATS = [
+const FALLBACK_TEAM = [
   { num: '전원', label: '요양보호사 자격증 보유' },
   { num: '정기', label: '전문 교육 및 역량 강화' },
   { num: '맞춤', label: '어르신별 담당 배정' },
 ]
 
 export default function TeamSection() {
+  const { data: teamData } = useMainContent('team')
+  const TEAM_STATS = teamData.length > 0
+    ? teamData.map(t => ({ num: t['이름'], label: t['내용'] }))
+    : FALLBACK_TEAM
   return (
     <section className="py-24 px-6 bg-[#F2FBF6]">
       <div className="mx-auto max-w-6xl">

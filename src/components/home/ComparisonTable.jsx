@@ -1,7 +1,8 @@
 import FadeIn from '../common/FadeIn'
 import { useSiteSettings } from '../../contexts/SiteSettingsContext'
+import { useMainContent } from '../../contexts/MainContentContext'
 
-const ITEMS = [
+const FALLBACK_ITEMS = [
   { label: '서비스 지역', other: '일부 지역 한정', ours: '제주도 포함 전국 서비스' },
   { label: '등급 신청 대행', other: '미지원 또는 별도 비용', ours: '무료 원스톱 대행' },
   { label: '치매예방 프로그램', other: '일반 요양만 제공', ours: '치매예방활동지원 특화' },
@@ -20,6 +21,10 @@ const CheckCircle = () => (
 export default function ComparisonTable() {
   const { settings } = useSiteSettings()
   const phone = settings['전화번호'] || '041-555-9991'
+  const { data: compData } = useMainContent('comparison')
+  const ITEMS = compData.length > 0
+    ? compData.map(c => ({ label: c['이름'], other: c['값'] || '', ours: c['값2'] || '' }))
+    : FALLBACK_ITEMS
 
   return (
     <section className="py-24 px-6 bg-gradient-to-b from-[#F2FBF6] to-white">

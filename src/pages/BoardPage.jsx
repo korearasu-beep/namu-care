@@ -3,6 +3,7 @@ import PageHeader from '../components/common/PageHeader'
 import FadeIn from '../components/common/FadeIn'
 import NoticeList from '../components/board/NoticeList'
 import AlbumGrid from '../components/board/AlbumGrid'
+import { useMainContent } from '../contexts/MainContentContext'
 
 const TABS = [
   { key: 'notice', label: '📋 공지사항' },
@@ -11,18 +12,19 @@ const TABS = [
 
 export default function BoardPage() {
   const [activeTab, setActiveTab] = useState('notice')
+  const { data: headerData } = useMainContent('page-board')
+  const h = headerData[0] || {}
 
   return (
     <>
       <PageHeader
-        tag="NEWS & GALLERY"
-        title="나무재가의"
-        highlight="소식과 활동"
+        tag={h['내용'] || 'NEWS & GALLERY'}
+        title={h['이름'] || '나무재가의'}
+        highlight={h['값'] || '소식과 활동'}
       />
 
       <section className="py-16 pb-24 px-6 bg-white">
         <div className="mx-auto max-w-[900px]">
-          {/* Tab buttons */}
           <FadeIn>
             <div className="flex gap-2 mb-10">
               {TABS.map((tab) => (
@@ -41,12 +43,10 @@ export default function BoardPage() {
             </div>
           </FadeIn>
 
-          {/* Content */}
           <div>
             {activeTab === 'notice' ? <NoticeList /> : <AlbumGrid />}
           </div>
 
-          {/* Pagination */}
           <FadeIn delay={0.15}>
             <div className="flex justify-center gap-1.5 mt-10">
               {[1, 2, 3].map((p) => (

@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
+import { useMainContent } from '../../contexts/MainContentContext'
 
-const STATS = [
+const FALLBACK_STATS = [
   { number: '1,051만', label: '65세 이상 고령 인구', sub: '2025년 기준' },
   { number: '20.3%', label: '초고령사회 공식 진입', sub: '전체 인구 대비' },
   { number: '116.5만', label: '장기요양 수급자', sub: '매년 증가 추세' },
 ]
 
 export default function StatsBar() {
+  const { data: statsData } = useMainContent('stats')
+  const STATS = statsData.length > 0
+    ? statsData.map(s => ({ number: s['이름'], label: s['내용'], sub: s['값'] || '' }))
+    : FALLBACK_STATS
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
 

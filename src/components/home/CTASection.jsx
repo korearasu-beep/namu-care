@@ -1,11 +1,18 @@
 import { Link } from 'react-router-dom'
 import FadeIn from '../common/FadeIn'
 import { useSiteSettings } from '../../contexts/SiteSettingsContext'
+import { useMainContent } from '../../contexts/MainContentContext'
 
 export default function CTASection() {
   const { settings } = useSiteSettings()
   const phone = settings['전화번호'] || '041-555-9991'
   const hours = settings['운영시간'] || '평일·주말 포함 07:00~21:00'
+  const { data: ctaData } = useMainContent('cta')
+  const cta = ctaData[0] || {}
+  const heading = cta['이름'] || '어르신의 편안한 일상, 저희가 함께합니다'
+  const description = cta['내용'] || '궁금한 점이 있으시면 언제든 전화 주세요.\n장기요양 등급 신청부터 서비스 이용까지 친절하게 안내해 드립니다.'
+  const badgeText = cta['값'] || '지금 바로 상담 받으세요'
+  const secondaryBtn = cta['값2'] || '온라인 상담 신청하기'
 
   return (
     <section className="py-24 px-6 bg-gradient-to-br from-deep-green to-[#3A7250] relative overflow-hidden">
@@ -15,15 +22,15 @@ export default function CTASection() {
       <div className="mx-auto max-w-[700px] text-center relative z-[1]">
         <FadeIn>
           <div className="inline-flex items-center gap-2 bg-white/[0.08] rounded-full px-5 py-2 mb-7">
-            <span className="text-[13px] font-semibold text-[#B8E8D0]">지금 바로 상담 받으세요</span>
+            <span className="text-[13px] font-semibold text-[#B8E8D0]">{badgeText}</span>
           </div>
 
           <h2 className="text-[clamp(26px,4vw,40px)] font-extrabold text-white leading-[1.35] tracking-tight mb-4">
-            어르신의 편안한 일상,<br />저희가 함께합니다
+            {heading.split('\n').map((line, i) => <span key={i}>{line}{i < heading.split('\n').length - 1 && <br />}</span>)}
           </h2>
 
           <p className="text-[17px] text-[#B8E8D0cc] leading-[1.7] mb-10">
-            궁금한 점이 있으시면 언제든 전화 주세요.<br />장기요양 등급 신청부터 서비스 이용까지 친절하게 안내해 드립니다.
+            {description.split('\n').map((line, i) => <span key={i}>{line}{i < description.split('\n').length - 1 && <br />}</span>)}
           </p>
 
           <div className="flex flex-col items-center gap-4">
@@ -38,7 +45,7 @@ export default function CTASection() {
               to="/contact"
               className="bg-white/[0.1] text-white border-[1.5px] border-white/[0.2] rounded-[14px] px-8 py-3.5 text-[15px] font-semibold hover:bg-white/[0.15] transition-colors"
             >
-              온라인 상담 신청하기
+              {secondaryBtn}
             </Link>
           </div>
 

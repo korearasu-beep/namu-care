@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import FadeIn from '../common/FadeIn'
+import { useSiteSettings } from '../../contexts/SiteSettingsContext'
 
-const RELATIONS = ['본인', '자녀', '배우자', '며느리/사위', '손자녀', '기타']
-const ELDER_STATUS = ['거동 불편', '치매 의심', '와상 상태', '일상생활 보조 필요', '등급 미신청', '기타']
+const FALLBACK_RELATIONS = ['본인', '자녀', '배우자', '며느리/사위', '손자녀', '기타']
+const FALLBACK_STATUS = ['거동 불편', '치매 의심', '와상 상태', '일상생활 보조 필요', '등급 미신청', '기타']
 
 export default function ConsultForm() {
+  const { settings } = useSiteSettings()
+  const RELATIONS = settings['관계옵션'] ? settings['관계옵션'].split(',').map(s => s.trim()) : FALLBACK_RELATIONS
+  const ELDER_STATUS = settings['어르신상태옵션'] ? settings['어르신상태옵션'].split(',').map(s => s.trim()) : FALLBACK_STATUS
   const [form, setForm] = useState({
     name: '', phone: '', relation: '', elderStatus: '', message: '',
   })

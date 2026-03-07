@@ -1,6 +1,7 @@
 import FadeIn from '../common/FadeIn'
+import { useMainContent } from '../../contexts/MainContentContext'
 
-const REASONS = [
+const FALLBACK_REASONS = [
   { emoji: '🌳', title: '뿌리 깊은 신뢰', desc: '해당지역에 뿌리내린 전문 재가요양기관으로서, 어르신 한 분 한 분께 정성을 다합니다.' },
   { emoji: '👩‍⚕️', title: '전문 요양보호사', desc: '체계적으로 교육받은 요양보호사가 어르신의 상태에 맞는 맞춤 돌봄을 제공합니다.' },
   { emoji: '🧠', title: '치매예방 특화 프로그램', desc: '일반 요양 서비스를 넘어, 어르신의 인지 기능 유지를 위한 전문 프로그램을 운영합니다.' },
@@ -8,6 +9,10 @@ const REASONS = [
 ]
 
 export default function WhyChooseSection() {
+  const { data: whyData } = useMainContent('whychoose')
+  const REASONS = whyData.length > 0
+    ? whyData.map(w => ({ emoji: w['아이콘'] || '🌱', title: w['이름'], desc: w['내용'] }))
+    : FALLBACK_REASONS
   return (
     <section className="py-24 px-6 bg-white">
       <div className="mx-auto max-w-6xl">

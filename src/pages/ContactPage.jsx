@@ -3,6 +3,7 @@ import FadeIn from '../components/common/FadeIn'
 import ConsultForm from '../components/contact/ConsultForm'
 import MapSection from '../components/contact/MapSection'
 import { useSiteSettings } from '../contexts/SiteSettingsContext'
+import { useMainContent } from '../contexts/MainContentContext'
 
 const CONTACT_CARDS = [
   { icon: '📞', title: '전화 상담', valueKey: '전화번호', defaultValue: '041-555-9991', sub: '평일·주말 포함 07:00 ~ 21:00', actionPrefix: 'tel:', btnText: '바로 전화하기' },
@@ -13,14 +14,16 @@ const CONTACT_CARDS = [
 export default function ContactPage() {
   const { settings } = useSiteSettings()
   const phone = settings['전화번호'] || '041-555-9991'
+  const { data: headerData } = useMainContent('page-contact')
+  const h = headerData[0] || {}
 
   return (
     <>
       <PageHeader
-        tag="CONTACT US"
-        title="편하게"
-        highlight="상담 신청하세요"
-        description="전화 한 통이면 충분합니다. 등급 신청부터 서비스까지 친절하게 안내드립니다."
+        tag={h['내용'] || 'CONTACT US'}
+        title={h['이름'] || '편하게'}
+        highlight={h['값'] || '상담 신청하세요'}
+        description={h['값2'] || '전화 한 통이면 충분합니다. 등급 신청부터 서비스까지 친절하게 안내드립니다.'}
       />
 
       {/* Contact Cards */}

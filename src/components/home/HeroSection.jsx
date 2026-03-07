@@ -40,7 +40,10 @@ export default function HeroSection() {
   useEffect(() => { setTimeout(() => setLoaded(true), 100) }, [])
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-[#FAFDF8] via-mint-pale to-[#F2FBF6] flex items-center overflow-hidden pt-16">
+    <section
+      className="relative min-h-screen flex items-center overflow-hidden"
+      style={{ background: 'linear-gradient(168deg, #FAFDF8 0%, #E8F7EF 50%, #F2FBF6 100%)', paddingTop: 68 }}
+    >
       <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,_#B8E8D030,_transparent_70%)] blur-[40px]" />
       <div className="absolute bottom-[5%] left-[-10%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,_#8FD5B720,_transparent_70%)] blur-[50px]" />
 
@@ -61,7 +64,7 @@ export default function HeroSection() {
         </div>
       ))}
 
-      <div className="mx-auto max-w-6xl px-6 py-16 pb-20 w-full relative z-[2]">
+      <div className="mx-auto max-w-[1120px] px-6 py-[60px] pb-[80px] w-full relative z-[2]">
         <div className="max-w-[640px]">
           <div
             className="inline-flex items-center gap-2 bg-deep-green/[0.06] border border-deep-green/[0.12] rounded-full px-4 py-[7px] mb-7 transition-all duration-600"
@@ -72,18 +75,18 @@ export default function HeroSection() {
           </div>
 
           <h1
-            className="text-[clamp(32px,5vw,52px)] font-extrabold text-gray-900 leading-[1.3] tracking-tight mb-5 transition-all duration-700"
+            className="text-[clamp(32px,5vw,52px)] font-extrabold text-[#1A2B23] leading-[1.3] tracking-tight mb-5 transition-all duration-700"
             style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(24px)', transitionDelay: '0.3s' }}
           >
             {renderHeading(heading)}
           </h1>
 
           <p
-            className="text-[clamp(16px,2vw,19px)] text-gray-500 leading-[1.7] mb-10 max-w-[480px] transition-all duration-700"
+            className="text-[clamp(16px,2vw,19px)] text-[#5F706A] leading-[1.7] mb-10 max-w-[480px] transition-all duration-700"
             style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(24px)', transitionDelay: '0.45s' }}
           >
             {description}
-            <br /><strong className="text-gray-700">{boldLine}</strong>
+            <br /><strong className="text-[#2C3E36]">{boldLine}</strong>
           </p>
 
           <div
@@ -92,14 +95,14 @@ export default function HeroSection() {
           >
             <a
               href={`tel:${phone}`}
-              className="inline-flex items-center gap-2 bg-deep-green text-white rounded-[14px] px-8 py-4 text-base font-bold shadow-[0_4px_24px_rgba(45,90,61,0.2)] hover:bg-deep-green/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-deep-green text-white rounded-[14px] px-8 py-4 text-base font-bold shadow-[0_4px_24px_rgba(45,90,61,0.22)] hover:bg-deep-green/90 transition-colors"
             >
               {btn1}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <Link
               to="/about"
-              className="bg-white text-deep-green border-[1.5px] border-gray-200 rounded-[14px] px-7 py-4 text-base font-semibold hover:border-deep-green hover:bg-mint-pale transition-all"
+              className="bg-white text-deep-green border-[1.5px] border-[#DDE5E0] rounded-[14px] px-7 py-4 text-base font-semibold hover:border-deep-green hover:bg-mint-pale transition-all"
             >
               {btn2}
             </Link>
@@ -114,7 +117,7 @@ export default function HeroSection() {
                 <div className="w-[22px] h-[22px] rounded-full bg-deep-green/[0.07] flex items-center justify-center">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10l4 4 6-8" stroke="#2D5A3D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
-                <span className="text-sm text-gray-500 font-medium">{t}</span>
+                <span className="text-sm text-[#5F706A] font-medium">{t}</span>
               </div>
             ))}
           </div>
@@ -125,9 +128,9 @@ export default function HeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 transition-opacity duration-1000"
         style={{ opacity: loaded ? 0.5 : 0, transitionDelay: '1.2s' }}
       >
-        <span className="text-xs text-gray-400 tracking-[0.05em]">아래로 스크롤</span>
-        <div className="w-6 h-[38px] rounded-xl border-2 border-gray-400 relative">
-          <div className="w-1 h-2 rounded-sm bg-gray-400 absolute left-1/2 top-1.5 -translate-x-1/2 animate-[scrollPulse_2s_ease-in-out_infinite]" />
+        <span className="text-xs text-[#9BA8A0] tracking-[0.05em]">아래로 스크롤</span>
+        <div className="w-6 h-[38px] rounded-xl border-2 border-[#9BA8A0] relative">
+          <div className="w-1 h-2 rounded-sm bg-[#9BA8A0] absolute left-1/2 top-1.5 -translate-x-1/2 animate-[scrollPulse_2s_ease-in-out_infinite]" />
         </div>
       </div>
 

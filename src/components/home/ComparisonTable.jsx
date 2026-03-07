@@ -27,7 +27,7 @@ export default function ComparisonTable() {
     : FALLBACK_ITEMS
 
   return (
-    <section className="py-24 px-6 bg-gradient-to-b from-[#F2FBF6] to-white">
+    <section className="py-[100px] px-6 bg-gradient-to-b from-[#F2FBF6] to-white">
       <div className="mx-auto max-w-[900px]">
         <FadeIn>
           <div className="text-center mb-14">

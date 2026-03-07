@@ -21,7 +21,7 @@ export default function GreetingSection() {
   const paragraphs = greeting.split('\n\n').filter(Boolean)
 
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-[100px] px-6 bg-white">
       <div className="mx-auto max-w-[900px]">
         <FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-12 items-start">

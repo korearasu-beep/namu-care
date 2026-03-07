@@ -27,7 +27,7 @@ export default function HistorySection() {
   }
 
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-[100px] px-6 bg-white">
       <div className="mx-auto max-w-[700px]">
         <FadeIn>
           <div className="text-center mb-14">

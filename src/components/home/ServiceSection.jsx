@@ -57,8 +57,8 @@ export default function ServiceSection() {
   }
 
   return (
-    <section className="py-24 px-6 bg-white">
-      <div className="mx-auto max-w-6xl">
+    <section className="py-[100px] px-6 bg-white">
+      <div className="mx-auto max-w-[1120px]">
         <FadeIn>
           <div className="text-center mb-16">
             <span className="inline-block text-[13px] font-bold text-deep-green tracking-[0.08em] uppercase mb-3">OUR SERVICES</span>

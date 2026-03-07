@@ -23,7 +23,7 @@ export default function BoardPage() {
         highlight={h['값'] || '소식과 활동'}
       />
 
-      <section className="py-16 pb-24 px-6 bg-white">
+      <section className="pt-[60px] pb-[100px] px-6 bg-white">
         <div className="mx-auto max-w-[900px]">
           <FadeIn>
             <div className="flex gap-2 mb-10">

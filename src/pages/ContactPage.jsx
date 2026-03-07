@@ -27,8 +27,8 @@ export default function ContactPage() {
       />
 
       {/* Contact Cards */}
-      <section className="py-16 pb-0 px-6 bg-white">
-        <div className="mx-auto max-w-6xl">
+      <section className="pt-[60px] pb-0 px-6 bg-white">
+        <div className="mx-auto max-w-[1120px]">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {CONTACT_CARDS.map((c, i) => {
               const value = settings[c.valueKey] || c.defaultValue
@@ -60,8 +60,8 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Map */}
-      <section className="py-20 px-6 bg-white">
-        <div className="mx-auto max-w-6xl">
+      <section className="py-20 px-6 bg-white" style={{ padding: '80px 24px' }}>
+        <div className="mx-auto max-w-[1120px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <ConsultForm />
             <div>

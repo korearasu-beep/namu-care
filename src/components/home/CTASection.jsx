@@ -15,7 +15,7 @@ export default function CTASection() {
   const secondaryBtn = cta['값2'] || '온라인 상담 신청하기'
 
   return (
-    <section className="py-24 px-6 bg-gradient-to-br from-deep-green to-[#3A7250] relative overflow-hidden">
+    <section className="py-[100px] px-6 bg-gradient-to-br from-deep-green to-[#3A7250] relative overflow-hidden">
       <div className="absolute -top-[100px] -right-[100px] w-[400px] h-[400px] rounded-full bg-[#8FD5B712]" />
       <div className="absolute -bottom-[80px] -left-[80px] w-[300px] h-[300px] rounded-full bg-[#B8E8D008]" />
 

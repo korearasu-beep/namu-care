@@ -13,8 +13,8 @@ export default function TeamSection() {
     ? teamData.map(t => ({ num: t['이름'], label: t['내용'] }))
     : FALLBACK_TEAM
   return (
-    <section className="py-24 px-6 bg-[#F2FBF6]">
-      <div className="mx-auto max-w-6xl">
+    <section className="py-[100px] px-6 bg-[#F2FBF6]">
+      <div className="mx-auto max-w-[1120px]">
         <FadeIn>
           <div className="text-center mb-14">
             <span className="inline-block text-[13px] font-bold text-deep-green tracking-[0.08em] uppercase mb-3">OUR TEAM</span>

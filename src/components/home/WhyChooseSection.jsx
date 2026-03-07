@@ -14,8 +14,8 @@ export default function WhyChooseSection() {
     ? whyData.map(w => ({ emoji: w['아이콘'] || '🌱', title: w['이름'], desc: w['내용'] }))
     : FALLBACK_REASONS
   return (
-    <section className="py-24 px-6 bg-white">
-      <div className="mx-auto max-w-6xl">
+    <section className="py-[100px] px-6 bg-white">
+      <div className="mx-auto max-w-[1120px]">
         <FadeIn>
           <div className="text-center mb-16">
             <span className="inline-block text-[13px] font-bold text-deep-green tracking-[0.08em] uppercase mb-3">WHY US</span>

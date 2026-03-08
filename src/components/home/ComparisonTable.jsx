@@ -27,7 +27,7 @@ export default function ComparisonTable() {
     : FALLBACK_ITEMS
 
   return (
-    <section className="py-[100px] px-6 bg-gradient-to-b from-[#F2FBF6] to-white">
+    <section className="py-24 px-6 bg-[#F2FBF6]">
       <div className="mx-auto max-w-[900px]">
         <FadeIn>
           <div className="text-center mb-14">
@@ -40,7 +40,7 @@ export default function ComparisonTable() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="rounded-3xl overflow-hidden border border-gray-200 bg-white shadow-[0_4px_24px_rgba(45,90,61,0.05)]">
+          <div className="rounded-3xl overflow-hidden border border-gray-200 bg-white shadow-[0_8px_32px_rgba(45,90,61,0.06)]">
             {/* Header */}
             <div className="grid grid-cols-[1.2fr_1fr_1fr] border-b-2 border-gray-200">
               <div className="p-[18px_24px] text-sm font-bold text-gray-500 bg-[#F8FAF9]">비교 항목</div>
@@ -73,7 +73,7 @@ export default function ComparisonTable() {
           <div className="text-center mt-10">
             <a
               href={`tel:${phone}`}
-              className="inline-flex items-center gap-2 bg-deep-green text-white rounded-[14px] px-8 py-3.5 text-[15px] font-bold shadow-[0_4px_20px_rgba(45,90,61,0.2)] hover:bg-deep-green/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-deep-green text-white rounded-xl px-8 py-3.5 text-[15px] font-bold shadow-[0_8px_24px_rgba(45,90,61,0.25)] hover:bg-deep-green/90 hover:shadow-[0_12px_32px_rgba(45,90,61,0.35)] hover:-translate-y-0.5 transition-all duration-300"
             >
               나무재가 무료 상담 받기
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>

@@ -14,7 +14,7 @@ export default function WhyChooseSection() {
     ? whyData.map(w => ({ emoji: w['아이콘'] || '🌱', title: w['이름'], desc: w['내용'] }))
     : FALLBACK_REASONS
   return (
-    <section className="py-[100px] px-6 bg-white">
+    <section className="py-24 px-6 bg-white">
       <div className="mx-auto max-w-[1120px]">
         <FadeIn>
           <div className="text-center mb-16">
@@ -28,7 +28,7 @@ export default function WhyChooseSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {REASONS.map((item, i) => (
             <FadeIn key={i} delay={i * 0.1}>
-              <div className="p-9 rounded-[20px] border border-[#F0F4F2] bg-[#FEFDFB] hover:border-mint hover:-translate-y-[3px] transition-all duration-300 h-full">
+              <div className="p-9 rounded-2xl border border-gray-100 bg-white hover:border-mint hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(45,90,61,0.08)] transition-all duration-300 h-full">
                 <div className="text-4xl mb-4">{item.emoji}</div>
                 <h3 className="text-[19px] font-bold text-gray-900 mb-2.5">{item.title}</h3>
                 <p className="text-sm text-gray-500 leading-[1.7]">{item.desc}</p>

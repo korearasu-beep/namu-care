@@ -57,7 +57,7 @@ export default function ServiceSection() {
   }
 
   return (
-    <section className="py-[100px] px-6 bg-white">
+    <section className="py-24 px-6 bg-white">
       <div className="mx-auto max-w-[1120px]">
         <FadeIn>
           <div className="text-center mb-16">
@@ -71,20 +71,20 @@ export default function ServiceSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((s, i) => (
             <FadeIn key={s.title || i} delay={i * 0.1}>
-              <div className="relative bg-[#F8FAF9] rounded-[20px] p-8 border border-[#F0F4F2] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(45,90,61,0.07)] hover:border-[#B8E8D0] transition-all duration-300 cursor-pointer h-full overflow-hidden">
+              <div className="relative bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:-translate-y-[4px] hover:shadow-[0_16px_48px_rgba(45,90,61,0.1)] hover:border-[#B8E8D0] transition-all duration-300 cursor-pointer h-full overflow-hidden group">
                 {s.badge && (
                   <div className="absolute top-4 right-4 bg-gradient-to-br from-deep-green to-[#478A5F] text-white text-[11px] font-bold px-2.5 py-1 rounded-full">
                     {s.badge}
                   </div>
                 )}
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-mint-pale to-[#B8E8D060] flex items-center justify-center mb-5">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-mint-pale to-[#B8E8D080] flex items-center justify-center mb-5 group-hover:shadow-[0_4px_16px_rgba(143,213,183,0.3)] transition-shadow duration-300">
                   {SERVICE_ICONS[s.icon] || SERVICE_ICONS.home}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2.5">{s.title}</h3>
                 <p className="text-sm text-gray-500 leading-[1.65] mb-4">{s.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {s.tags.map((t) => (
-                    <span key={t} className="text-xs text-deep-green font-medium bg-deep-green/[0.05] px-2.5 py-1 rounded-full">
+                    <span key={t} className="text-xs text-deep-green font-medium bg-deep-green/[0.05] px-3 py-1 rounded-full">
                       {t}
                     </span>
                   ))}

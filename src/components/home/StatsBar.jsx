@@ -29,10 +29,13 @@ export default function StatsBar() {
   return (
     <section
       ref={ref}
-      className="bg-gradient-to-br from-deep-green to-[#3A7250] py-12 px-6 relative overflow-hidden"
+      className="relative overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #1E4A30 0%, #2D5A3D 40%, #2A6B3F 100%)' }}
     >
-      <div className="absolute -top-[50px] -right-[50px] w-[200px] h-[200px] rounded-full bg-[#8FD5B710]" />
-      <div className="mx-auto max-w-[1120px] grid grid-cols-1 sm:grid-cols-3 gap-8 relative z-[1]">
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #8FD5B7 1px, transparent 1px), radial-gradient(circle at 80% 20%, #8FD5B7 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      <div className="absolute -top-[60px] -right-[60px] w-[250px] h-[250px] rounded-full bg-[#8FD5B715]" />
+      <div className="absolute -bottom-[40px] -left-[40px] w-[180px] h-[180px] rounded-full bg-[#B8E8D010]" />
+      <div className="mx-auto max-w-[1120px] px-6 py-14 grid grid-cols-1 sm:grid-cols-3 gap-8 relative z-[1]">
         {STATS.map((s, i) => (
           <div
             key={i}
@@ -43,9 +46,9 @@ export default function StatsBar() {
               transitionDelay: `${i * 0.15}s`,
             }}
           >
-            <div className="text-[36px] font-extrabold text-[#B8E8D0] tracking-tight">{s.number}</div>
-            <div className="text-[15px] font-semibold text-white mt-1">{s.label}</div>
-            <div className="text-xs text-[#B8E8D090] mt-0.5">{s.sub}</div>
+            <div className="text-[40px] font-extrabold text-[#B8E8D0] tracking-tight leading-none">{s.number}</div>
+            <div className="text-[15px] font-semibold text-white mt-2">{s.label}</div>
+            {s.sub && <div className="text-xs text-[#B8E8D0] opacity-60 mt-1">{s.sub}</div>}
           </div>
         ))}
       </div>

@@ -44,8 +44,8 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ background: 'linear-gradient(168deg, #FAFDF8 0%, #E8F7EF 50%, #F2FBF6 100%)', paddingTop: 68 }}
     >
-      <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,_#B8E8D030,_transparent_70%)] blur-[40px]" />
-      <div className="absolute bottom-[5%] left-[-10%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,_#8FD5B720,_transparent_70%)] blur-[50px]" />
+      <div className="absolute top-[5%] right-[-8%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,_#B8E8D040,_transparent_70%)] blur-[60px]" />
+      <div className="absolute bottom-[0%] left-[-12%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,_#8FD5B730,_transparent_70%)] blur-[60px]" />
 
       {[...Array(5)].map((_, i) => (
         <div
@@ -75,7 +75,7 @@ export default function HeroSection() {
           </div>
 
           <h1
-            className="text-[clamp(32px,5vw,52px)] font-extrabold text-[#1A2B23] leading-[1.3] tracking-tight mb-5 transition-all duration-700"
+            className="text-[clamp(36px,5.5vw,60px)] font-extrabold text-[#1A2B23] leading-[1.25] tracking-tight mb-6 transition-all duration-700"
             style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(24px)', transitionDelay: '0.3s' }}
           >
             {renderHeading(heading)}
@@ -95,14 +95,14 @@ export default function HeroSection() {
           >
             <a
               href={`tel:${phone}`}
-              className="inline-flex items-center gap-2 bg-deep-green text-white rounded-[14px] px-8 py-4 text-base font-bold shadow-[0_4px_24px_rgba(45,90,61,0.22)] hover:bg-deep-green/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-deep-green text-white rounded-xl px-8 py-4 text-base font-bold shadow-[0_8px_32px_rgba(45,90,61,0.3)] hover:bg-deep-green/90 hover:shadow-[0_12px_40px_rgba(45,90,61,0.4)] hover:-translate-y-0.5 transition-all duration-300"
             >
               {btn1}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <Link
               to="/about"
-              className="bg-white text-deep-green border-[1.5px] border-[#DDE5E0] rounded-[14px] px-7 py-4 text-base font-semibold hover:border-deep-green hover:bg-mint-pale transition-all"
+              className="bg-white text-deep-green border-[1.5px] border-gray-200 rounded-xl px-7 py-4 text-base font-semibold hover:border-deep-green hover:bg-mint-pale hover:-translate-y-0.5 transition-all duration-300"
             >
               {btn2}
             </Link>

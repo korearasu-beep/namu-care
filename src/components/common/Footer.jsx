@@ -30,7 +30,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-bold text-white mb-4">서비스</h4>
             {['방문요양', '방문목욕', '복지용구', '치매예방활동지원'].map((l, i) => (
-              <Link key={i} to="/" className="block text-[13px] text-[#9BA8A0] mb-2.5 hover:text-[#B8E8D0] transition-colors">
+              <Link key={i} to="/" className="block text-[13px] text-[#9BA8A0] mb-2.5 hover:text-mint-light transition-colors">
                 {l}
               </Link>
             ))}
@@ -47,7 +47,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[#2C3E36] pt-6 flex flex-wrap justify-between items-center gap-3">
+        <div className="border-t border-gray-800 pt-6 flex flex-wrap justify-between items-center gap-3">
           <p className="text-xs text-[#9BA8A080]">&copy; {new Date().getFullYear()} 나무재가방문요양. All rights reserved.</p>
           <div className="flex gap-4">
             {['개인정보처리방침', '이용약관'].map((l, i) => (

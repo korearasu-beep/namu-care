@@ -36,6 +36,7 @@ export default function Nav() {
           background: scrolled ? 'rgba(255,255,255,0.92)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px) saturate(1.5)' : 'none',
           borderBottom: scrolled ? '1px solid #DDE5E0' : '1px solid transparent',
+          boxShadow: scrolled ? '0 4px 24px rgba(0,0,0,0.04)' : 'none',
         }}
       >
         <div className="mx-auto max-w-[1120px] flex items-center justify-between h-[68px]">
@@ -65,7 +66,7 @@ export default function Nav() {
             ))}
             <a
               href={`tel:${phone}`}
-              className="flex items-center gap-1.5 bg-deep-green text-white rounded-3xl px-[22px] py-2.5 text-sm font-semibold shadow-[0_2px_12px_rgba(45,90,61,0.25)] hover:bg-deep-green/90 transition-colors"
+              className="flex items-center gap-1.5 bg-deep-green text-white rounded-full px-6 py-2.5 text-sm font-semibold shadow-[0_4px_16px_rgba(45,90,61,0.3)] hover:bg-deep-green/90 hover:shadow-[0_6px_24px_rgba(45,90,61,0.35)] transition-all duration-300"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 4.5A1.5 1.5 0 014.5 3h2.42a1 1 0 01.95.68l.86 2.58a1 1 0 01-.3 1.05l-1.17.97a10.05 10.05 0 004.46 4.46l.97-1.17a1 1 0 011.05-.3l2.58.86a1 1 0 01.68.95v2.42a1.5 1.5 0 01-1.5 1.5A14.5 14.5 0 013 4.5z" fill="currentColor"/></svg>
               <span>무료 상담</span>

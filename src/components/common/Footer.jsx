@@ -9,36 +9,36 @@ export default function Footer() {
   const hours = settings['운영시간'] || '평일·주말 포함 07:00 ~ 21:00'
 
   return (
-    <footer className="bg-[#1A2B23] text-[#9BA8A0]" style={{ padding: '64px 24px 40px' }}>
-      <div className="mx-auto max-w-[1120px]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+    <footer style={{ backgroundColor: '#1A2B23', color: '#9BA8A0', padding: '64px 24px 40px' }}>
+      <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 40, marginBottom: 48 }}>
           <div>
-            <div className="mb-4">
+            <div style={{ marginBottom: 16 }}>
               <img
                 src="/images/logo.png"
                 alt="나무재가 방문요양센터"
-                className="h-8 object-contain rounded-md brightness-130"
+                style={{ height: 32, objectFit: 'contain', borderRadius: 6, filter: 'brightness(1.3)' }}
                 onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'inline' }}
               />
-              <span className="hidden text-white font-bold text-lg">나무재가 방문요양센터</span>
+              <span style={{ display: 'none', color: 'white', fontWeight: 700, fontSize: '1.125rem' }}>나무재가 방문요양센터</span>
             </div>
-            <p className="text-[13px] leading-[1.7] text-[#9BA8A0]">
+            <p style={{ fontSize: 13, lineHeight: 1.7, color: '#9BA8A0' }}>
               어르신과 보호자 모두 만족하는<br />편안한 도움 서비스를 제공하겠습니다.
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-bold text-white mb-4">서비스</h4>
+            <h4 style={{ fontSize: 14, fontWeight: 700, color: 'white', marginBottom: 16 }}>서비스</h4>
             {['방문요양', '방문목욕', '복지용구', '치매예방활동지원'].map((l, i) => (
-              <Link key={i} to="/" className="block text-[13px] text-[#9BA8A0] mb-2.5 hover:text-mint-light transition-colors">
+              <Link key={i} to="/" style={{ display: 'block', fontSize: 13, color: '#9BA8A0', marginBottom: 10, textDecoration: 'none' }}>
                 {l}
               </Link>
             ))}
           </div>
 
           <div>
-            <h4 className="text-sm font-bold text-white mb-4">연락처</h4>
-            <p className="text-[13px] leading-[2.2] text-[#9BA8A0]">
+            <h4 style={{ fontSize: 14, fontWeight: 700, color: 'white', marginBottom: 16 }}>연락처</h4>
+            <p style={{ fontSize: 13, lineHeight: 2.2, color: '#9BA8A0' }}>
               📞 {phone}<br />
               📧 {email}<br />
               📍 {address}<br />
@@ -47,11 +47,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-6 flex flex-wrap justify-between items-center gap-3">
-          <p className="text-xs text-[#9BA8A080]">&copy; {new Date().getFullYear()} 나무재가방문요양. All rights reserved.</p>
-          <div className="flex gap-4">
+        <div style={{ borderTop: '1px solid #374151', paddingTop: 24, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+          <p style={{ fontSize: 12, color: 'rgba(155,168,160,0.5)' }}>&copy; {new Date().getFullYear()} 나무재가방문요양. All rights reserved.</p>
+          <div style={{ display: 'flex', gap: 16 }}>
             {['개인정보처리방침', '이용약관'].map((l, i) => (
-              <Link key={i} to="#" className="text-xs text-[#9BA8A080] hover:text-[#9BA8A0] transition-colors">
+              <Link key={i} to="#" style={{ fontSize: 12, color: 'rgba(155,168,160,0.5)', textDecoration: 'none' }}>
                 {l}
               </Link>
             ))}

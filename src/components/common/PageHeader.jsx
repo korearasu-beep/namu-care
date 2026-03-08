@@ -6,32 +6,76 @@ export default function PageHeader({ tag, title, highlight, description }) {
 
   return (
     <section
-      className="relative overflow-hidden"
-      style={{ paddingTop: 68, background: 'linear-gradient(168deg, #FAFDF8 0%, #E8F7EF 60%, #F2FBF6 100%)' }}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        paddingTop: 68,
+        background: 'linear-gradient(168deg, #FAFDF8 0%, #E8F7EF 60%, #F2FBF6 100%)',
+      }}
     >
-      <div className="absolute top-[20%] right-[-8%] w-[350px] h-[350px] rounded-full bg-[radial-gradient(circle,_#B8E8D025,_transparent_70%)] blur-[40px]" />
-      <div className="mx-auto max-w-[1120px] px-6 py-20 pb-[60px] relative z-[2]">
+      {/* Decorative blur */}
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        right: '-8%',
+        width: 350,
+        height: 350,
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(184,232,208,0.15), transparent 70%)',
+        filter: 'blur(40px)',
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{
+        maxWidth: 1120,
+        margin: '0 auto',
+        padding: '80px 1.5rem 60px',
+        position: 'relative',
+        zIndex: 2,
+      }}>
         <span
-          className="inline-block text-[13px] font-bold text-deep-green tracking-[0.08em] uppercase mb-3 transition-opacity duration-600"
-          style={{ opacity: loaded ? 1 : 0, transitionDelay: '0.2s' }}
+          style={{
+            display: 'inline-block',
+            fontSize: 13,
+            fontWeight: 700,
+            color: '#2D5A3D',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: 12,
+            opacity: loaded ? 1 : 0,
+            transition: 'opacity 0.6s ease',
+            transitionDelay: '0.2s',
+          }}
         >
           {tag}
         </span>
         <h1
-          className="text-[clamp(30px,5vw,46px)] font-extrabold text-[#1A2B23] leading-[1.3] tracking-tight transition-all duration-700"
           style={{
+            fontSize: 'clamp(30px, 5vw, 46px)',
+            fontWeight: 800,
+            color: '#1A2B23',
+            lineHeight: 1.3,
+            letterSpacing: '-0.02em',
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'all 0.7s ease',
             transitionDelay: '0.3s',
           }}
         >
           {title}
-          <br /><span className="text-deep-green">{highlight}</span>
+          <br /><span style={{ color: '#2D5A3D' }}>{highlight}</span>
         </h1>
         {description && (
           <p
-            className="text-[17px] text-[#5F706A] mt-3 leading-relaxed transition-opacity duration-700"
-            style={{ opacity: loaded ? 1 : 0, transitionDelay: '0.5s' }}
+            style={{
+              fontSize: 17,
+              color: '#5F706A',
+              marginTop: 12,
+              lineHeight: 1.6,
+              opacity: loaded ? 1 : 0,
+              transition: 'opacity 0.7s ease',
+              transitionDelay: '0.5s',
+            }}
           >
             {description}
           </p>
